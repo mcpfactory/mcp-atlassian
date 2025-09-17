@@ -1,0 +1,4 @@
+fastmcp
+anyio
+requests
+pydantic
