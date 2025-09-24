@@ -1,0 +1,279 @@
+name: dev-foo-server1
+lang: python
+functions:
+    - type: tool
+      name: jira_get_issue
+      description: 获取指定Jira问题的详细信息
+      tags: jira,read
+      parameters:
+        - name: issue_key
+          type: string
+          optional: false
+        - name: fields
+          type: string
+          optional: true
+        - name: expand
+          type: string
+          optional: true
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_search_issues
+      description: 使用JQL搜索Jira问题
+      tags: jira,read
+      parameters:
+        - name: jql
+          type: string
+          optional: false
+        - name: fields
+          type: string
+          optional: true
+        - name: start_at
+          type: integer
+          optional: true
+          default: "0"
+        - name: max_results
+          type: integer
+          optional: true
+          default: "50"
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_create_issue
+      description: 创建新的Jira问题
+      tags: jira,write
+      parameters:
+        - name: project_key
+          type: string
+          optional: false
+        - name: summary
+          type: string
+          optional: false
+        - name: issue_type
+          type: string
+          optional: false
+        - name: description
+          type: string
+          optional: true
+        - name: assignee
+          type: string
+          optional: true
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_update_issue
+      description: 更新现有Jira问题
+      tags: jira,write
+      parameters:
+        - name: issue_key
+          type: string
+          optional: false
+        - name: fields
+          type: object
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_delete_issue
+      description: 删除Jira问题
+      tags: jira,write
+      parameters:
+        - name: issue_key
+          type: string
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_add_comment
+      description: 向Jira问题添加评论
+      tags: jira,write
+      parameters:
+        - name: issue_key
+          type: string
+          optional: false
+        - name: comment
+          type: string
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_get_transitions
+      description: 获取Jira问题的可用状态转换
+      tags: jira,read
+      parameters:
+        - name: issue_key
+          type: string
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_transition_issue
+      description: 转换Jira问题到新状态
+      tags: jira,write
+      parameters:
+        - name: issue_key
+          type: string
+          optional: false
+        - name: transition_id
+          type: string
+          optional: false
+        - name: fields
+          type: object
+          optional: true
+        - name: comment
+          type: string
+          optional: true
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_get_projects
+      description: 获取所有可访问的Jira项目
+      tags: jira,read
+      returnType: string
+      created: true
+    - type: tool
+      name: jira_get_user_profile
+      description: 获取Jira用户的个人资料信息
+      tags: jira,read
+      parameters:
+        - name: user_identifier
+          type: string
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_search
+      description: 搜索Confluence内容
+      tags: confluence,read
+      parameters:
+        - name: query
+          type: string
+          optional: false
+        - name: limit
+          type: integer
+          optional: true
+          default: "25"
+        - name: start
+          type: integer
+          optional: true
+          default: "0"
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_get_page
+      description: 获取Confluence页面内容
+      tags: confluence,read
+      parameters:
+        - name: page_id
+          type: string
+          optional: false
+        - name: title
+          type: string
+          optional: false
+        - name: space_key
+          type: string
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_create_page
+      description: 创建新的Confluence页面
+      tags: confluence,write
+      parameters:
+        - name: space_key
+          type: string
+          optional: false
+        - name: title
+          type: string
+          optional: false
+        - name: content
+          type: string
+          optional: false
+        - name: parent_id
+          type: string
+          optional: true
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_update_page
+      description: 更新现有Confluence页面
+      tags: confluence,write
+      parameters:
+        - name: page_id
+          type: string
+          optional: false
+        - name: title
+          type: string
+          optional: false
+        - name: content
+          type: string
+          optional: false
+        - name: parent_id
+          type: string
+          optional: true
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_delete_page
+      description: 删除Confluence页面
+      tags: confluence,write
+      parameters:
+        - name: page_id
+          type: string
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_add_comment
+      description: 向Confluence页面添加评论
+      tags: confluence,write
+      parameters:
+        - name: page_id
+          type: string
+          optional: false
+        - name: content
+          type: string
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_get_page_children
+      description: 获取Confluence页面的子页面
+      tags: confluence,read
+      parameters:
+        - name: parent_id
+          type: string
+          optional: false
+        - name: limit
+          type: integer
+          optional: true
+          default: "25"
+        - name: start
+          type: integer
+          optional: true
+          default: "0"
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_get_page_labels
+      description: 获取Confluence页面的标签
+      tags: confluence,read
+      parameters:
+        - name: page_id
+          type: string
+          optional: false
+      returnType: string
+      created: true
+    - type: tool
+      name: confluence_add_page_label
+      description: 向Confluence页面添加标签
+      tags: confluence,write
+      parameters:
+        - name: page_id
+          type: string
+          optional: false
+        - name: label_name
+          type: string
+          optional: false
+      returnType: string
+      created: true
